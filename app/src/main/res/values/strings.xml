@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Tubesp3b</string>
+    <string name="title_Head">My WatchList</string>
+    <string name="tv_pengantar">Ini adalah watch list saya , saya dapat menambah,melihat,memberi review,dan rating saya juga dapat melihat status saya</string>
+    <string name="btn_start">START!</string>
+    <string name="tv_daftar">Daftar Movie</string>
+    <string name="btn_add">+</string>
+    <string name="tv_tambahfilm">Tambah Film</string>
+    <string name="et_sinopsis">Tell me about the movie</string>
+    <string name="et_judul">Input your movie here...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
