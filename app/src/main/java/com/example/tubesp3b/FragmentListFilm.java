@@ -7,15 +7,21 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class FragmentListFilm extends Fragment {
-    public  FragmentListFilm(){
+import com.example.tubesp3b.databinding.ListFilmBinding;
 
-    }
+public class FragmentListFilm extends Fragment {
+    ListFilmBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.list_film,container,false);
+        this.binding = ListFilmBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         return view;
 
+    }
+    public static FragmentListFilm newInstance(){
+        FragmentListFilm fragment = new FragmentListFilm();
+        return fragment;
     }
 }
