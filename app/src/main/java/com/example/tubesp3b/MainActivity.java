@@ -5,11 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
-import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.example.tubesp3b.databinding.ActivityMainBinding;
 
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity{
         abdt.syncState();
 
         this.presenter = new MainPresenter(this);
-        this.presenter.changePage(1);
+        this.presenter.getMainPage();
         this.getSupportFragmentManager().setFragmentResultListener("addMovie", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(String requestKey , Bundle result){

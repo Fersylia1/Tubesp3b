@@ -17,8 +17,13 @@ public class MainPresenter{
         this.fragmentManager = activity.getSupportFragmentManager();
         this.fragment_main = MainFragment.newInstance();
         this.fragment_list_film = FragmentListFilm.newInstance();
-        this.fragment_Tambah_Film = new FragmentTambahFilm();
+        this.fragment_Tambah_Film = FragmentTambahFilm.newInstance();
         this.fragmentContainerId = activity.getFrameLayoutId();
+    }
+    public void getMainPage(){
+        FragmentTransaction ft =  this.fragmentManager.beginTransaction();
+        ft.add(fragmentContainerId,fragment_main);
+        ft.commit();
     }
 
     public void changePage(int page){
@@ -27,20 +32,15 @@ public class MainPresenter{
             if(fragment_main.isAdded()){
                 ft.show(fragment_main);
             }else{
-                ft.add(fragmentContainerId,fragment_main);
-            }
-            if(fragment_list_film.isAdded()){
-                ft.hide(fragment_list_film);
+                ft.replace(fragmentContainerId,fragment_main)
+                    .addToBackStack(null);
             }
         } else if(page==2){
             if(fragment_list_film.isAdded()){
                 ft.show(fragment_list_film);
             }else{
-                ft.add(fragmentContainerId,fragment_list_film)
+                ft.replace(fragmentContainerId,fragment_list_film)
                         .addToBackStack(null);
-            }
-            if(fragment_main.isAdded()){
-                ft.hide(fragment_main);
             }
         } else if(page==5) {
             closeApplication();
@@ -48,11 +48,8 @@ public class MainPresenter{
             if(fragment_Tambah_Film.isAdded()){
                 ft.show(fragment_Tambah_Film);
             }else{
-                ft.add(fragmentContainerId,fragment_Tambah_Film)
+                ft.replace(fragmentContainerId,fragment_Tambah_Film)
                         .addToBackStack(null);
-            }
-            if(fragment_list_film.isAdded()){
-                ft.hide(fragment_list_film);
             }
         }
         ft.commit();

@@ -14,9 +14,6 @@ public class MainFragment extends Fragment  {
     private Button add,start;
     private MainFragmentBinding binding;
 
-    public MainFragment(){
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
                              Bundle savedInstanceState){

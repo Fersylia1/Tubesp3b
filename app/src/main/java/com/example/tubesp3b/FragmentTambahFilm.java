@@ -38,6 +38,8 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
             getParentFragmentManager().setFragmentResult("addMovie",bundle);
         }
     }
-
-
+    public static FragmentTambahFilm newInstance(){
+        FragmentTambahFilm fragment = new FragmentTambahFilm();
+        return fragment;
+    }
 }
