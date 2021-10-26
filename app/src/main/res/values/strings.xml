@@ -12,4 +12,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="openDrawer">Open Drawer :</string>
     <string name="closeDrawer">Close Drawer :</string>
+    <string name="tambah_film">Add</string>
 </resources>

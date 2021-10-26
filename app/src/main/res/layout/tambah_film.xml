@@ -4,11 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg2" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +20,7 @@
         android:layout_below="@+id/tv_tambahFilm"
         android:hint="@string/et_judul"
         android:layout_marginTop="50dp"
-        android:id="@+id/et_judul"/>
+        android:id="@+id/et_judul" />
 
     <EditText
         android:id="@+id/et_Sinopsis"
@@ -35,4 +30,13 @@
         android:hint="@string/et_sinopsis"
         android:inputType="text"
         android:layout_marginTop="300dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/tambah_film"
+        android:id="@+id/btn_tambahfilm"
+        android:backgroundTint="#A9A9A9"/>
+
 </RelativeLayout>

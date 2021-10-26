@@ -9,7 +9,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.tubesp3b.databinding.ActivityMainBinding;
 
@@ -19,12 +23,15 @@ public class MainActivity extends AppCompatActivity {
     private MainFragment fragment_main;
     private FragmentListFilm fragment_list_film;
     private Toolbar toolbar;
+    private FragmentTambahFilm fragment_Tambah_Film;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.binding = ActivityMainBinding.inflate(this.getLayoutInflater());
         setContentView(binding.getRoot());
+
+
 
         this.toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -37,13 +44,23 @@ public class MainActivity extends AppCompatActivity {
         this.fragment_main = MainFragment.newInstance();
         this.fragment_list_film = FragmentListFilm.newInstance();
         this.fragmentManager = getSupportFragmentManager();
+        this.fragment_Tambah_Film = new FragmentTambahFilm();
         changePage(1);
+        this.getSupportFragmentManager().setFragmentResultListener("addMovie", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(String requestKey , Bundle result){
+                String judul = result.getString("judul");
+                String sinopsis = result.getString("sinopsis");
+                //nunggu mvp ya mar..
+
+            }
+        });
         this.getSupportFragmentManager().setFragmentResultListener("changePage", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 int page = result.getInt("page");
                 changePage(page);
-                drawer.close();
+                drawer.closeDrawers();
             }
         });
     }
@@ -70,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if(page==5) {
             closeApplication();
+        } else if(page==6){
+            if(fragment_Tambah_Film.isAdded()){
+                ft.show(fragment_Tambah_Film);
+            }else{
+                ft.add(binding.fragmentContainer.getId(),fragment_Tambah_Film);
+            }
+            if(fragment_list_film.isAdded()){
+                ft.hide(fragment_list_film);
+            }
         }
         ft.commit();
     }
