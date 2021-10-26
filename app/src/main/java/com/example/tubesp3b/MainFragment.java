@@ -24,15 +24,9 @@ public class MainFragment extends Fragment  {
         View view = binding.getRoot();
 
         this.start = binding.BtnStart;
-        // this.add = findViewById(R.id.btn_plus);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                FragmentManager fm = getParentFragmentManager();
-//                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container,new FragmentListFilm());
-//                fragmentTransaction.commit();
-
                 Bundle result = new Bundle();
                 result.putInt("page", 2);
                 getParentFragmentManager().setFragmentResult("changePage", result);
