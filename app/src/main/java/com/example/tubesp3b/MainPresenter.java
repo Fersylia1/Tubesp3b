@@ -1,8 +1,15 @@
 package com.example.tubesp3b;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Parcelable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainPresenter{
     private Activity activity;
@@ -11,6 +18,9 @@ public class MainPresenter{
     private FragmentListFilm fragment_list_film;
     private FragmentTambahFilm fragment_Tambah_Film;
     private int fragmentContainerId;
+    private List<Movie> movies = new ArrayList<Movie>();
+    private FilmListAdapter adapter;
+    private String sharedPrefFile = "com.example.tubesp3b";
 
     public MainPresenter(MainActivity activity){
         this.activity = activity;
@@ -58,4 +68,18 @@ public class MainPresenter{
         activity.moveTaskToBack(true);
         activity.finish();
     }
+    public void addList(Movie newMovie){
+        this.movies.add(newMovie);
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("movieList", (ArrayList<? extends Parcelable>) this.movies);
+        this.fragment_list_film.setArguments(args);
+    }
+//    public void saveList(){
+//        SharedPreferences sp = this.activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor preferencesEditor = sp.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(movies);
+//        preferencesEditor.putString("movies",json);
+//        preferencesEditor.commit();
+//    }
 }

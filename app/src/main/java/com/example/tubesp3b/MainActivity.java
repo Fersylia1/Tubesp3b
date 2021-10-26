@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity{
             public void onFragmentResult(String requestKey , Bundle result){
                 String judul = result.getString("judul");
                 String sinopsis = result.getString("sinopsis");
-                //nunggu mvp ya mar..
-
+                Movie newMovie = new Movie(judul,sinopsis);
+                presenter.addList(newMovie);
+                presenter.changePage(2);
             }
         });
         this.getSupportFragmentManager().setFragmentResultListener("changePage", this, new FragmentResultListener() {
@@ -53,4 +54,10 @@ public class MainActivity extends AppCompatActivity{
     public int getFrameLayoutId() {
         return binding.fragmentContainer.getId();
     }
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        this.presenter.saveList();
+//    }
 }
