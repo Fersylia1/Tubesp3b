@@ -12,11 +12,13 @@ import java.util.List;
 public class FilmListAdapter extends BaseAdapter {
     private ItemListFilmBinding binding;
     private ArrayList<Movie> listItems;
-    private FragmentListFilm activity;
+    private FragmentListFilm fragment;
+    private ListFilmPresenter presenter;
 
-    public FilmListAdapter(FragmentListFilm activity){
-        this.activity=activity;
+    public FilmListAdapter(FragmentListFilm fragment, ListFilmPresenter presenter){
+        this.fragment=fragment;
         this.listItems=new ArrayList<Movie>();
+        this.presenter = presenter;
     }
 
     public void initList(List<Movie> items){
@@ -53,9 +55,9 @@ public class FilmListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(view == null){
-            this.binding = ItemListFilmBinding.inflate(this.activity.getLayoutInflater());
+            this.binding = ItemListFilmBinding.inflate(this.fragment.getLayoutInflater());
             view = this.binding.getRoot();
-            viewHolder = new ViewHolder(binding);
+            viewHolder = new ViewHolder(binding, presenter);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -65,17 +67,25 @@ public class FilmListAdapter extends BaseAdapter {
         return view;
     }
 
-    private class ViewHolder{
+    private class ViewHolder implements View.OnClickListener{
         protected ItemListFilmBinding binding;
         private Movie item;
+        private ListFilmPresenter presenter;
 
-        public ViewHolder(ItemListFilmBinding binding){
+        public ViewHolder(ItemListFilmBinding binding, ListFilmPresenter presenter){
             this.binding = binding;
+            this.binding.llRoot.setOnClickListener(this);
+            this.presenter = presenter;
         }
 
         public void updateView(Movie item){
             this.item = item;
             this.binding.tvTitle.setText(item.getTitle());
+        }
+
+        @Override
+        public void onClick(View view) {
+            presenter.getDetailPage(this.item);
         }
     }
 }

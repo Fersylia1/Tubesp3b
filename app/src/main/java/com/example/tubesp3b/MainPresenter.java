@@ -1,13 +1,10 @@
 package com.example.tubesp3b;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +18,16 @@ public class MainPresenter{
     private List<Movie> movies = new ArrayList<Movie>();
     private FilmListAdapter adapter;
     private String sharedPrefFile = "com.example.tubesp3b";
+    private DetailFragment fragment_detail;
 
     public MainPresenter(MainActivity activity){
         this.activity = activity;
         this.fragmentManager = activity.getSupportFragmentManager();
         this.fragment_main = MainFragment.newInstance();
-        this.fragment_list_film = FragmentListFilm.newInstance();
         this.fragment_Tambah_Film = FragmentTambahFilm.newInstance();
         this.fragmentContainerId = activity.getFrameLayoutId();
+        this.fragment_list_film = FragmentListFilm.newInstance();
+        this.fragment_detail = DetailFragment.newInstance();
     }
     public void getMainPage(){
         FragmentTransaction ft =  this.fragmentManager.beginTransaction();
@@ -59,6 +58,13 @@ public class MainPresenter{
                 ft.show(fragment_Tambah_Film);
             }else{
                 ft.replace(fragmentContainerId,fragment_Tambah_Film)
+                        .addToBackStack(null);
+            }
+        } else if(page==7){
+            if(fragment_detail.isAdded()){
+                ft.show(fragment_detail);
+            }else{
+                ft.replace(fragmentContainerId,fragment_detail)
                         .addToBackStack(null);
             }
         }

@@ -1,8 +1,5 @@
 package com.example.tubesp3b;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +8,12 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.tubesp3b.databinding.ListFilmBinding;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class FragmentListFilm extends Fragment implements View.OnClickListener{
     ListFilmBinding binding;
     private Button btnPlus;
     private FilmListAdapter adapter;
+    private ListFilmPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
@@ -29,9 +22,10 @@ public class FragmentListFilm extends Fragment implements View.OnClickListener{
         View view = binding.getRoot();
         this.btnPlus= this.binding.btnPlus;
         this.btnPlus.setOnClickListener(this);
-        this.adapter = new FilmListAdapter(this);
+        this.presenter = new ListFilmPresenter(this);
+        this.adapter = new FilmListAdapter(this, presenter);
         binding.listMovie.setAdapter(this.adapter);
-        if(!(this.getArguments() == null)){
+        if(this.getArguments() != null && getArguments().containsKey("movieList")){
             adapter.initList(this.getArguments().getParcelableArrayList("movieList"));
         }
 //        else{
