@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_tambahfilm"
-        android:id="@+id/tv_tambahFilm"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_below="@+id/tv_tambahFilm"
-        android:hint="@string/et_judul"
-        android:layout_marginTop="50dp"
-        android:id="@+id/et_judul" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_tambahfilm"
+            android:id="@+id/tv_tambahFilm"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:layout_marginTop="30dp"/>
 
-    <EditText
-        android:id="@+id/et_Sinopsis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_judul"
-        android:hint="@string/et_sinopsis"
-        android:inputType="text" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_below="@+id/tv_tambahFilm"
+            android:hint="@string/et_judul"
+            android:layout_marginTop="50dp"
+            android:id="@+id/et_judul" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_Sinopsis"
-        android:text="@string/upload_poster"
-        android:id="@+id/upload_poster"
-        android:backgroundTint="#A9A9A9"/>
+        <EditText
+            android:id="@+id/et_Sinopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_judul"
+            android:hint="@string/et_sinopsis"
+            android:inputType="text" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@+id/upload_poster"
-        android:layout_marginTop="50dp"
-        android:id="@+id/gambar1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_Sinopsis"
+            android:text="@string/upload_poster"
+            android:id="@+id/upload_poster"
+            android:backgroundTint="#A9A9A9"/>
 
-    <Button
-        android:id="@+id/btn_tambahfilm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="#A9A9A9"
-        android:text="@string/tambah_film" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/upload_poster"
+            android:id="@+id/gambar1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/tambah_film"
+            android:id="@+id/btn_tambahfilm"
+            android:backgroundTint="#A9A9A9"
+            android:layout_below="@+id/gambar1"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
