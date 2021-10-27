@@ -28,8 +28,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_judul"
         android:hint="@string/et_sinopsis"
-        android:inputType="text"
-        android:layout_marginTop="300dp"/>
+        android:inputType="text" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_Sinopsis"
+        android:text="@string/upload_poster"
+        android:id="@+id/upload_poster"
+        android:backgroundTint="#A9A9A9"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/upload_poster"
+        android:layout_marginTop="50dp"
+        android:id="@+id/gambar1"/>
 
     <Button
         android:layout_width="match_parent"
