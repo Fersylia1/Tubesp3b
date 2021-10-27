@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentResultListener;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.tubesp3b.databinding.ActivityMainBinding;
@@ -14,12 +16,15 @@ public class MainActivity extends AppCompatActivity{
     private ActivityMainBinding binding;
     private Toolbar toolbar;
     private MainPresenter presenter;
+    private PenyimpananNilai pencatat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.binding = ActivityMainBinding.inflate(this.getLayoutInflater());
         setContentView(binding.getRoot());
+
+        SharedPreferences sp = this.getPreferences(MODE_PRIVATE);
 
         this.toolbar = binding.toolbar;
         setSupportActionBar(toolbar);

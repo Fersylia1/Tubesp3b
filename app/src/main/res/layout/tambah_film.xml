@@ -46,11 +46,11 @@
         android:id="@+id/gambar1"/>
 
     <Button
+        android:id="@+id/btn_tambahfilm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/tambah_film"
-        android:id="@+id/btn_tambahfilm"
-        android:backgroundTint="#A9A9A9"/>
+        android:backgroundTint="#A9A9A9"
+        android:text="@string/tambah_film" />
 
 </RelativeLayout>

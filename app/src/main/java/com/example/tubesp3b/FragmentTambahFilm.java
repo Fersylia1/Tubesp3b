@@ -1,5 +1,6 @@
 package com.example.tubesp3b;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
     private EditText et_judulFilm;
     private EditText et_SinopsisFilm;
     private ImageView poster;
+    private PenyimpananNilai pencatat;
 
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
@@ -31,11 +33,10 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
         View view = binding.getRoot();
         this.btn_tambahFilm = this.binding.btnTambahfilm;
         this.btn_tambahFilm.setOnClickListener(this);
-        this.et_judulFilm = this.binding.etJudul;
-        this.et_judulFilm.setOnClickListener(this);
-        this.et_SinopsisFilm = this.binding.etSinopsis;
-        this.et_SinopsisFilm.setOnClickListener(this);
-        this.poster = this.binding.gambar1;
+
+        this.pencatat = new PenyimpananNilai(this.binding.etJudul.getContext());
+        this.pencatat = new PenyimpananNilai(this.binding.etSinopsis.getContext());
+
         return view;
     }
     public void onClick(View view){
@@ -50,6 +51,9 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
             bundle.putString("poster",strPoster);
 
             getParentFragmentManager().setFragmentResult("addMovie",bundle);
+
+           // this.storeInternal(this.binding.etJudul.getEditableText().toString() + this.binding.etSinopsis.getEditableText().toString());
+
         }
     }
     public static FragmentTambahFilm newInstance(){
@@ -63,4 +67,5 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
         String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
         return imgString;
     }
+
 }
