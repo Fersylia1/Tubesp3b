@@ -85,7 +85,8 @@ public class FilmListAdapter extends BaseAdapter {
 
         @Override
         public void onClick(View view) {
-            presenter.getDetailPage(this.item);
+            int position = listItems.indexOf(item);
+            presenter.getDetailPage(this.item, position);
         }
     }
 }

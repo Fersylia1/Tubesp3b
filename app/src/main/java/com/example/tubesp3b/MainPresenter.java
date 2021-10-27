@@ -17,8 +17,9 @@ public class MainPresenter{
     private int fragmentContainerId;
     private List<Movie> movies = new ArrayList<Movie>();
     private FilmListAdapter adapter;
-    private String sharedPrefFile = "com.example.tubesp3b";
+//    private String sharedPrefFile = "com.example.tubesp3b";
     private DetailFragment fragment_detail;
+    private EditDetailFragment fragment_edit_detail;
 
     public MainPresenter(MainActivity activity){
         this.activity = activity;
@@ -28,6 +29,7 @@ public class MainPresenter{
         this.fragmentContainerId = activity.getFrameLayoutId();
         this.fragment_list_film = FragmentListFilm.newInstance();
         this.fragment_detail = DetailFragment.newInstance();
+        this.fragment_edit_detail = EditDetailFragment.newInstance();
     }
     public void getMainPage(){
         FragmentTransaction ft =  this.fragmentManager.beginTransaction();
@@ -67,6 +69,13 @@ public class MainPresenter{
                 ft.replace(fragmentContainerId,fragment_detail)
                         .addToBackStack(null);
             }
+        } else if(page==8){
+            if(fragment_edit_detail.isAdded()){
+                ft.show(fragment_edit_detail);
+            }else{
+                ft.replace(fragmentContainerId,fragment_edit_detail)
+                        .addToBackStack(null);
+            }
         }
         ft.commit();
     }
@@ -79,6 +88,9 @@ public class MainPresenter{
         Bundle args = new Bundle();
         args.putParcelableArrayList("movieList", (ArrayList<? extends Parcelable>) this.movies);
         this.fragment_list_film.setArguments(args);
+    }
+    public void changeList(Movie movie, int moviePosition){
+        movies.set(moviePosition, movie);
     }
 //    public void saveList(){
 //        SharedPreferences sp = this.activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);

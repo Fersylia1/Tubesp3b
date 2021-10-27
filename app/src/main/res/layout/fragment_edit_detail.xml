@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@null"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -26,12 +27,13 @@
         android:layout_height="2dp"
         android:background="#c0c0c0"/>
 
-    <TextView
-        android:id="@+id/tv_synopsis"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_synopsis"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@null"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -40,16 +42,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status: "/>
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Status: "
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/et_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_status"
+            android:gravity="center_horizontal"
+            android:background="@null"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -60,16 +67,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Review"/>
-    <TextView
-        android:id="@+id/tv_review"
+    <EditText
+        android:id="@+id/et_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </TextView>
+    </EditText>
     <Button
-        android:id="@+id/btn_edit"
+        android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
+        android:text="Save"
         android:layout_gravity="right">
     </Button>
 </LinearLayout>

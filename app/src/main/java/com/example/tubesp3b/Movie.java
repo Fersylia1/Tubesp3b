@@ -1,20 +1,29 @@
 package com.example.tubesp3b;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Movie implements Parcelable {
     private String title;
     private String synopsis;
+    private String poster;
+    private String status;
+    private String review;
 
-    public Movie(String title, String synopsis){
+    public Movie(String title, String synopsis, String poster, String status, String review){
         this.title = title;
         this.synopsis = synopsis;
+        this.poster = poster;
+        this.status = status;
+        this.review = review;
+
     }
 
     protected Movie(Parcel in) {
         title = in.readString();
         synopsis = in.readString();
+        poster = in.readString();
+        status = in.readString();
+        review = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -35,11 +44,29 @@ public class Movie implements Parcelable {
     public void setSynopsis(String synopsis){
         this.synopsis = synopsis;
     }
+    public void setPoster(String poster){
+        this.poster = poster;
+    }
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public void setReview(String review){
+        this.review = review;
+    }
     public String getTitle(){
         return this.title;
     }
     public String getSynopsis(){
         return this.synopsis;
+    }
+    public String getPoster(){
+        return this.poster;
+    }
+    public String getStatus(){
+        return this.status;
+    }
+    public String getReview(){
+        return this.review;
     }
 
     @Override
@@ -51,5 +78,8 @@ public class Movie implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(synopsis);
+        parcel.writeString(poster);
+        parcel.writeString(status);
+        parcel.writeString(review);
     }
 }

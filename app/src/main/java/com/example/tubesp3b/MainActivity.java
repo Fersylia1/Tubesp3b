@@ -36,9 +36,18 @@ public class MainActivity extends AppCompatActivity{
             public void onFragmentResult(String requestKey , Bundle result){
                 String judul = result.getString("judul");
                 String sinopsis = result.getString("sinopsis");
-                Movie newMovie = new Movie(judul,sinopsis);
+                String poster = result.getString("poster");
+                Movie newMovie = new Movie(judul,sinopsis, poster, "", "");
                 presenter.addList(newMovie);
                 presenter.changePage(2);
+            }
+        });
+        this.getSupportFragmentManager().setFragmentResultListener("changeList", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(String requestKey , Bundle result){
+                Movie movie = result.getParcelable("editedMovie");
+                int moviePosition = result.getInt("position");
+                presenter.changeList(movie, moviePosition);
             }
         });
         this.getSupportFragmentManager().setFragmentResultListener("changePage", this, new FragmentResultListener() {
