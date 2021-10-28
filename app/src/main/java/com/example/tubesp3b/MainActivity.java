@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity{
     private ActivityMainBinding binding;
     private Toolbar toolbar;
     private MainPresenter presenter;
-    private PenyimpananNilai pencatat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity{
         this.binding = ActivityMainBinding.inflate(this.getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SharedPreferences sp = this.getPreferences(MODE_PRIVATE);
 
         this.toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
