@@ -24,7 +24,7 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
     private EditText et_judulFilm;
     private EditText et_SinopsisFilm;
     private ImageView poster;
-    private PenyimpananNilai pencatat;
+    private PenyimpananNilai pencatat_judul ,  pencatat_sinopsis;
 
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
@@ -34,8 +34,8 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
         this.btn_tambahFilm = this.binding.btnTambahfilm;
         this.btn_tambahFilm.setOnClickListener(this);
 
-        this.pencatat = new PenyimpananNilai(this.binding.etJudul.getContext());
-        this.pencatat = new PenyimpananNilai(this.binding.etSinopsis.getContext());
+        this.pencatat_judul = new PenyimpananNilai(this.binding.etJudul.getContext());
+        this.pencatat_sinopsis = new PenyimpananNilai(this.binding.etSinopsis.getContext());
 
         return view;
     }
@@ -52,10 +52,24 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
 
             getParentFragmentManager().setFragmentResult("addMovie",bundle);
 
-           // this.storeInternal(this.binding.etJudul.getEditableText().toString() + this.binding.etSinopsis.getEditableText().toString());
-
+            int opt =1; // permanen(1)/temporary(2)
+           //this.storeInternal(this.binding.etJudul.getEditableText().toString() + this.binding.etSinopsis.getEditableText().toString());
+           // this.binding.tvTambahFilm.setText(this.loadInternal("test.txt",opt));
         }
     }
+    @Override
+    public  void onPause(){
+        super.onPause();
+        this.pencatat_judul.saveJudul(this.binding.etJudul.getText().toString());
+        this.pencatat_sinopsis.saveJudul(this.binding.etSinopsis.getText().toString());
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        this.binding.etJudul.setText(this.pencatat_judul.getJudul());
+        this.binding.etSinopsis.setText(this.pencatat_sinopsis.getSinopsis());
+    }
+
     public static FragmentTambahFilm newInstance(){
         FragmentTambahFilm fragment = new FragmentTambahFilm();
         return fragment;

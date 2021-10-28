@@ -15,6 +15,7 @@ public class LeftFragment extends Fragment{
     private MenuListAdapter adapter;
     private FragmentLeftBinding binding;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
