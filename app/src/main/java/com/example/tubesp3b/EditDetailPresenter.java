@@ -3,6 +3,7 @@ package com.example.tubesp3b;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class EditDetailPresenter {
     private FragmentManager fragmentManager;

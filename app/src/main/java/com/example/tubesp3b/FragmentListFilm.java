@@ -29,9 +29,11 @@ public class FragmentListFilm extends Fragment implements View.OnClickListener{
         this.binding = ListFilmBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         this.btnPlus= this.binding.btnPlus;
-        this.btnPlus.setOnClickListener(this);
+
+        this.presenter = new ListFilmPresenter(this);
         this.adapter = new FilmListAdapter(this,presenter);
         binding.listMovie.setAdapter(this.adapter);
+
         if(!(this.getArguments() == null)){
             adapter.initList(this.getArguments().getParcelableArrayList("movieList"));
         }
@@ -43,6 +45,8 @@ public class FragmentListFilm extends Fragment implements View.OnClickListener{
 //            List<Movie> arrayList = gson.fromJson(json, type);
 //            adapter.initList(arrayList);
 //        }
+
+        this.btnPlus.setOnClickListener(this);
         return view;
     }
     public static FragmentListFilm newInstance(){
