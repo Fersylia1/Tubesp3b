@@ -1,11 +1,10 @@
 package com.example.tubesp3b;
 
-import android.content.SharedPreferences;
+import android.content.Context;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
@@ -16,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -27,6 +27,10 @@ import com.example.tubesp3b.databinding.TambahFilmBinding;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class FragmentTambahFilm extends Fragment implements View.OnClickListener{
     TambahFilmBinding binding;
@@ -35,7 +39,8 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
     private EditText et_SinopsisFilm;
     private ImageView poster;
     private ActivityResultLauncher<Intent> intentLauncher;
-    private PenyimpananNilai pencatat;
+    private PenyimpananNilai pencatat_judul , pencatat_sinopsis;
+    private final static String FILE_NAME = "Test.txt";
 
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
@@ -50,8 +55,8 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
         this.btn_tambahFilm.setOnClickListener(this);
         binding.uploadPoster.setOnClickListener(this);
 
-        this.pencatat = new PenyimpananNilai(this.binding.etJudul.getContext());
-        this.pencatat = new PenyimpananNilai(this.binding.etSinopsis.getContext());
+        this.pencatat_judul = new PenyimpananNilai(this.binding.etJudul.getContext());
+        this.pencatat_sinopsis = new PenyimpananNilai(this.binding.etSinopsis.getContext());
 
         this.intentLauncher = this.registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -88,13 +93,52 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
 
             getParentFragmentManager().setFragmentResult("addMovie",bundle);
 
-           // this.storeInternal(this.binding.etJudul.getEditableText().toString() + this.binding.etSinopsis.getEditableText().toString());
+            int opt =1; // permanen(1)/temporary(2)
+            //this.storeInternal(this.binding.etJudul.getEditableText().toString() + this.binding.etSinopsis.getEditableText().toString());
+            // this.binding.tvTambahFilm.setText(this.loadInternal("test.txt",opt));
 
+//            String judul = this.et_judulFilm.getText().toString();
+//            String sinopsis = this.et_SinopsisFilm.getText().toString();
+//            String txt = judul + "" +sinopsis+ "";
+//            FileOutputStream fileOutputStream = null;
+//            try {
+//                fileOutputStream = getActivity().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+//                fileOutputStream.write(txt.getBytes());
+//                //this.et_judulFilm.getText().clear();
+//                //this.et_SinopsisFilm.getText().clear();
+//                // Toast.makeText(this,"Save to "+ getFilesDir()+"/"+FILE_NAME,Toast.LENGTH_LONG).show();
+//            } catch (FileNotFoundException e){
+//                e.printStackTrace();
+//            } catch (IOException e){
+//                e.printStackTrace();
+//            } finally {
+//                if(fileOutputStream!=null){
+//                    try {
+//                        {
+//                            fileOutputStream.close();
+//                        }
+//                    }catch (IOException e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
         }
         else{
             Intent chooseImageIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intentLauncher.launch(chooseImageIntent);
         }
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        this.pencatat_judul.saveJudul(et_judulFilm.getText().toString());
+        this.pencatat_sinopsis.saveSinopsis(et_SinopsisFilm.getText().toString());
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        this.et_judulFilm.setText(this.pencatat_judul.getJudul());
+        this.et_SinopsisFilm.setText(this.pencatat_sinopsis.getSinopsis());
     }
     public static FragmentTambahFilm newInstance(){
         FragmentTambahFilm fragment = new FragmentTambahFilm();
