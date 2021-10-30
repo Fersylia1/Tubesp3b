@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListFilmPresenter {
     private FragmentManager fragmentManager;
     private FragmentListFilm fragment_list_film;

@@ -96,32 +96,6 @@ public class FragmentTambahFilm extends Fragment implements View.OnClickListener
             int opt =1; // permanen(1)/temporary(2)
             //this.storeInternal(this.binding.etJudul.getEditableText().toString() + this.binding.etSinopsis.getEditableText().toString());
             // this.binding.tvTambahFilm.setText(this.loadInternal("test.txt",opt));
-
-//            String judul = this.et_judulFilm.getText().toString();
-//            String sinopsis = this.et_SinopsisFilm.getText().toString();
-//            String txt = judul + "" +sinopsis+ "";
-//            FileOutputStream fileOutputStream = null;
-//            try {
-//                fileOutputStream = getActivity().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-//                fileOutputStream.write(txt.getBytes());
-//                //this.et_judulFilm.getText().clear();
-//                //this.et_SinopsisFilm.getText().clear();
-//                // Toast.makeText(this,"Save to "+ getFilesDir()+"/"+FILE_NAME,Toast.LENGTH_LONG).show();
-//            } catch (FileNotFoundException e){
-//                e.printStackTrace();
-//            } catch (IOException e){
-//                e.printStackTrace();
-//            } finally {
-//                if(fileOutputStream!=null){
-//                    try {
-//                        {
-//                            fileOutputStream.close();
-//                        }
-//                    }catch (IOException e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
         }
         else{
             Intent chooseImageIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

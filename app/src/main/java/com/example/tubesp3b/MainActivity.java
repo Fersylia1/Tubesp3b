@@ -128,11 +128,11 @@ public class MainActivity extends AppCompatActivity{
         return binding.fragmentContainer.getId();
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        this.presenter.saveList();
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.presenter.saveList();
+    }
 
 
     @Override

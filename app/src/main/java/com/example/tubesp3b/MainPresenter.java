@@ -1,10 +1,16 @@
 package com.example.tubesp3b;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,7 +25,7 @@ public class MainPresenter{
     private int fragmentContainerId;
     private List<Movie> movies = new ArrayList<Movie>();
     private FilmListAdapter adapter;
-//    private String sharedPrefFile = "com.example.tubesp3b";
+    private String sharedPrefFile = "com.example.tubesp3b";
     private DetailFragment fragment_detail;
     private EditDetailFragment fragment_edit_detail;
 
@@ -30,6 +36,7 @@ public class MainPresenter{
         this.fragment_Tambah_Film = FragmentTambahFilm.newInstance();
         this.fragmentContainerId = activity.getFrameLayoutId();
         this.fragment_list_film = FragmentListFilm.newInstance();
+        loadList();
         this.fragment_detail = DetailFragment.newInstance();
         this.fragment_edit_detail = EditDetailFragment.newInstance();
     }
@@ -88,9 +95,10 @@ public class MainPresenter{
     public void addList(Movie newMovie){
         this.movies.add(newMovie);
         sortAscending();
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("movieList", (ArrayList<? extends Parcelable>) this.movies);
-        this.fragment_list_film.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putParcelableArrayList("movieList", (ArrayList<? extends Parcelable>) this.movies);
+//        this.fragment_list_film.setArguments(args);
+        this.fragment_list_film.setList(movies);
     }
     public void sortAscending() {
         Collections.sort(movies, new Comparator<Movie>() {
@@ -103,14 +111,26 @@ public class MainPresenter{
     public void changeList(Movie movie, int moviePosition){
         movies.set(moviePosition, movie);
     }
-//    public void saveList(){
-//        SharedPreferences sp = this.activity.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor preferencesEditor = sp.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(movies);
-//        preferencesEditor.putString("movies",json);
-//        preferencesEditor.commit();
-//    }
+    public void saveList(){
+        SharedPreferences sp = this.activity.getSharedPreferences(sharedPrefFile, activity.MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = sp.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(movies);
+        preferencesEditor.putString("movies",json);
+        preferencesEditor.apply();
+    }
+    public void loadList(){
+        SharedPreferences sp = this.activity.getSharedPreferences(sharedPrefFile, activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sp.getString("movies",null);
+        Type type = new TypeToken<ArrayList<Movie>>() {}.getType();
+        movies = gson.fromJson(json,type);
+
+        if (movies == null){
+            movies = new ArrayList<>();
+        }
+        this.fragment_list_film.setList(movies);
+    }
     public FilmListAdapter getFilmListAdapter(){
         return fragment_list_film.adapter;
     }
