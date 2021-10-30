@@ -14,7 +14,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:background="@null"/>
+            android:background="@null"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -51,7 +53,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical">
             <TextView
@@ -59,14 +61,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status: "
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_margin="5dp"/>
             <EditText
                 android:id="@+id/et_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_status"
                 android:gravity="center_horizontal"
-                android:background="@null"/>
+                android:background="@null"
+                android:layout_marginBottom="5dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -76,7 +80,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Review"/>
+            android:text="Review"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"/>
         <RatingBar
             android:id="@+id/rb_rating"
             android:layout_width="wrap_content"

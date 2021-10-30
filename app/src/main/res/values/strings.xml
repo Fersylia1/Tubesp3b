@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Tubesp3b</string>
+    <string name="app_name">Watch List</string>
     <string name="title_Head">My WatchList</string>
-    <string name="tv_pengantar">Ini adalah watch list saya, saya dapat menambah, melihat, memberi review,dan rating. Saya juga dapat melihat status film saya</string>
+    <string name="tv_pengantar">Ini adalah watch list saya, saya dapat menambah, melihat, memberi review, dan rating untuk film. Saya juga dapat melihat status menonton saya.</string>
     <string name="btn_start">START!</string>
     <string name="tv_daftar">Daftar Movie</string>
     <string name="btn_add">+</string>

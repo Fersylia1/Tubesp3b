@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:text="@string/title_Head"
         android:textAlignment="center"
-        android:textSize="50dp"
-        android:id="@+id/tv_TitleHead"/>
+        android:textSize="40sp"
+        android:id="@+id/tv_TitleHead"
+        android:layout_marginTop="10dp"/>
 
 
     <Button
@@ -31,6 +32,6 @@
         android:text="@string/tv_pengantar"
         android:layout_below="@+id/tv_TitleHead"
         android:textAlignment="center"
-        android:textSize="15dp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>
