@@ -2,8 +2,7 @@ package com.example.tubesp3b;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Parcelable;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -44,8 +43,12 @@ public class MainPresenter{
         FragmentTransaction ft =  this.fragmentManager.beginTransaction();
         ft.add(fragmentContainerId,fragment_main);
         ft.commit();
-    }
 
+        SharedPreferences prefs = activity.getSharedPreferences("prefs", activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false);
+        editor.apply();
+    }
     public void changePage(int page){
         FragmentTransaction ft =  this.fragmentManager.beginTransaction();
         if(page==1){
@@ -95,10 +98,16 @@ public class MainPresenter{
     public void addList(Movie newMovie){
         this.movies.add(newMovie);
         sortAscending();
-//        Bundle args = new Bundle();
-//        args.putParcelableArrayList("movieList", (ArrayList<? extends Parcelable>) this.movies);
-//        this.fragment_list_film.setArguments(args);
         this.fragment_list_film.setList(movies);
+    }
+    public void deleteList(Movie movie){
+        movies.remove(movie);
+        FragmentListFilm f2 = new FragmentListFilm();
+        f2.setList(movies);
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(fragmentContainerId, f2);
+        ft.addToBackStack(null);
+        ft.commit();
     }
     public void sortAscending() {
         Collections.sort(movies, new Comparator<Movie>() {

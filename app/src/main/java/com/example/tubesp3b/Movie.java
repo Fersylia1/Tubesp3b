@@ -7,15 +7,16 @@ public class Movie implements Parcelable {
     private String synopsis;
     private String poster;
     private String status;
+    private float rating;
     private String review;
 
-    public Movie(String title, String synopsis, String poster, String status, String review){
+    public Movie(String title, String synopsis, String poster, String status, float rating, String review){
         this.title = title;
         this.synopsis = synopsis;
         this.poster = poster;
         this.status = status;
+        this.rating = rating;
         this.review = review;
-
     }
 
     protected Movie(Parcel in) {
@@ -23,6 +24,7 @@ public class Movie implements Parcelable {
         synopsis = in.readString();
         poster = in.readString();
         status = in.readString();
+        rating = in.readFloat();
         review = in.readString();
     }
 
@@ -50,6 +52,9 @@ public class Movie implements Parcelable {
     public void setStatus(String status){
         this.status = status;
     }
+    public void setRating(float status){
+        this.rating = rating;
+    }
     public void setReview(String review){
         this.review = review;
     }
@@ -64,6 +69,9 @@ public class Movie implements Parcelable {
     }
     public String getStatus(){
         return this.status;
+    }
+    public float getRating(){
+        return this.rating;
     }
     public String getReview(){
         return this.review;
@@ -80,6 +88,7 @@ public class Movie implements Parcelable {
         parcel.writeString(synopsis);
         parcel.writeString(poster);
         parcel.writeString(status);
+        parcel.writeFloat(rating);
         parcel.writeString(review);
     }
 }

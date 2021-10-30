@@ -24,7 +24,7 @@ public class LeftFragment extends Fragment{
 
         ListView listView = binding.lvMenu;
         this.adapter = new MenuListAdapter(this.getActivity());
-        String[] items = {"Home", "Daftar", "History", "Pengaturan", "Exit"};
+        String[] items = {"Home", "Daftar", "Exit"};
         this.adapter.initList(items);
         listView.setAdapter(this.adapter);
 

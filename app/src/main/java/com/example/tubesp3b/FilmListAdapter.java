@@ -1,5 +1,7 @@
 package com.example.tubesp3b;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -140,7 +142,8 @@ public class FilmListAdapter extends BaseAdapter implements Filterable {
 
         public ViewHolder(ItemListFilmBinding binding, ListFilmPresenter presenter){
             this.binding = binding;
-            this.binding.llRoot.setOnClickListener(this);
+            this.binding.rlRoot.setOnClickListener(this);
+            this.binding.ibDelete.setOnClickListener(this);
             this.presenter = presenter;
         }
 
@@ -151,8 +154,26 @@ public class FilmListAdapter extends BaseAdapter implements Filterable {
 
         @Override
         public void onClick(View view) {
-            int position = listItems.indexOf(item);
-            presenter.getDetailPage(this.item, position);
+            if(view == binding.rlRoot){
+                int position = listItems.indexOf(item);
+                presenter.getDetailPage(this.item, position);
+            }
+            else{
+                AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                alert.setTitle("Delete entry");
+                alert.setMessage("Are you sure you want to delete?");
+                alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.deleteList(item);
+                    }
+                });
+                alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                alert.show();
+            }
         }
     }
 }

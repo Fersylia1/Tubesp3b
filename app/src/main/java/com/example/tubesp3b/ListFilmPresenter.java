@@ -25,4 +25,9 @@ public class ListFilmPresenter {
         bundle.putInt("page",7);
         fragmentManager.setFragmentResult("changePage",bundle);
     }
+    public void deleteList(Movie movie){
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("deleteMovie", movie);
+        fragmentManager.setFragmentResult("deleteMovie",bundle);
+    }
 }

@@ -64,6 +64,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Review"/>
+        <RatingBar
+            android:id="@+id/rb_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:isIndicator="true">
+        </RatingBar>
         <TextView
             android:id="@+id/tv_review"
             android:layout_width="match_parent"

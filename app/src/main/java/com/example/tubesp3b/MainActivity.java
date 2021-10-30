@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity{
         this.binding = ActivityMainBinding.inflate(this.getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SharedPreferences sp = this.getPreferences(MODE_PRIVATE);
-
         this.toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
@@ -45,16 +43,23 @@ public class MainActivity extends AppCompatActivity{
         abdt.syncState();
 
         this.presenter = new MainPresenter(this);
-        this.presenter.getMainPage();
+        presenter.getMainPage();
         this.getSupportFragmentManager().setFragmentResultListener("addMovie", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(String requestKey , Bundle result){
                 String judul = result.getString("judul");
                 String sinopsis = result.getString("sinopsis");
                 String poster = result.getString("poster");
-                Movie newMovie = new Movie(judul,sinopsis, poster, "", "");
+                Movie newMovie = new Movie(judul,sinopsis, poster, "", 0,"");
                 presenter.addList(newMovie);
                 presenter.changePage(2);
+            }
+        });
+        this.getSupportFragmentManager().setFragmentResultListener("deleteMovie", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(String requestKey , Bundle result){
+                Movie movie = result.getParcelable("deleteMovie");
+                presenter.deleteList(movie);
             }
         });
         this.getSupportFragmentManager().setFragmentResultListener("changeList", this, new FragmentResultListener() {
@@ -158,5 +163,14 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", true);
+        editor.apply();
     }
 }

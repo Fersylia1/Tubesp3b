@@ -52,6 +52,7 @@ public class EditDetailFragment extends Fragment implements View.OnClickListener
                 binding.ivPoster.setImageBitmap(decodedByte);
 
                 binding.etStatus.setText(movie.getStatus());
+                binding.rbRating.setRating(movie.getRating());
                 binding.etReview.setText(movie.getReview());
             }
         });
@@ -100,8 +101,9 @@ public class EditDetailFragment extends Fragment implements View.OnClickListener
             String poster = getEncoded64ImageStringFromBitmap(bm);
 
             String status = binding.etStatus.getText().toString();
+            float rating = binding.rbRating.getRating();
             String review = binding.etReview.getText().toString();
-            Movie editedMovie = new Movie(title, synopsis, poster, status, review);
+            Movie editedMovie = new Movie(title, synopsis, poster, status, rating, review);
             presenter.saveDetails(editedMovie, moviePosition);
         }
     }

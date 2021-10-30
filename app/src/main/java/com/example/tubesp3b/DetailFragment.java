@@ -43,6 +43,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                 binding.ivPoster.setImageBitmap(decodedByte);
 
                 binding.tvStatus.setText(currMovie.getStatus());
+                binding.rbRating.setRating(currMovie.getRating());
                 binding.tvReview.setText(currMovie.getReview());
             }
         });
@@ -59,6 +60,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                 binding.ivPoster.setImageBitmap(decodedByte);
 
                 binding.tvStatus.setText(currMovie.getStatus());
+                binding.rbRating.setRating(currMovie.getRating());
                 binding.tvReview.setText(currMovie.getReview());
             }
         });
