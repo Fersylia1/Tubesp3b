@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainPresenter{
@@ -85,9 +87,18 @@ public class MainPresenter{
     }
     public void addList(Movie newMovie){
         this.movies.add(newMovie);
+        sortAscending();
         Bundle args = new Bundle();
         args.putParcelableArrayList("movieList", (ArrayList<? extends Parcelable>) this.movies);
         this.fragment_list_film.setArguments(args);
+    }
+    public void sortAscending() {
+        Collections.sort(movies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie m1, Movie m2) {
+                return m1.getTitle().compareTo(m2.getTitle());
+            }
+        });
     }
     public void changeList(Movie movie, int moviePosition){
         movies.set(moviePosition, movie);
@@ -100,4 +111,7 @@ public class MainPresenter{
 //        preferencesEditor.putString("movies",json);
 //        preferencesEditor.commit();
 //    }
+    public FilmListAdapter getFilmListAdapter(){
+        return fragment_list_film.adapter;
+    }
 }

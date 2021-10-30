@@ -20,8 +20,9 @@ import java.util.List;
 public class FragmentListFilm extends Fragment implements View.OnClickListener{
     ListFilmBinding binding;
     private Button btnPlus;
-    private FilmListAdapter adapter;
+    FilmListAdapter adapter;
     private ListFilmPresenter presenter;
+    private Button btn_sortOrder;
 
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container,
@@ -29,6 +30,7 @@ public class FragmentListFilm extends Fragment implements View.OnClickListener{
         this.binding = ListFilmBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         this.btnPlus= this.binding.btnPlus;
+        this.btn_sortOrder = binding.btnSortOrder;
 
         this.presenter = new ListFilmPresenter(this);
         this.adapter = new FilmListAdapter(this,presenter);
@@ -47,17 +49,29 @@ public class FragmentListFilm extends Fragment implements View.OnClickListener{
 //        }
 
         this.btnPlus.setOnClickListener(this);
+        btn_sortOrder.setOnClickListener(this);
         return view;
     }
     public static FragmentListFilm newInstance(){
         FragmentListFilm fragment = new FragmentListFilm();
         return fragment;
     }
+    @Override
     public void onClick(View view){
         if(view == this.btnPlus){
             Bundle bundle = new Bundle();
             bundle.putInt("page",6);
             getParentFragmentManager().setFragmentResult("changePage",bundle);
+        }
+        else{
+            if(btn_sortOrder.getText().toString() == "Ascending"){
+                binding.btnSortOrder.setText("Descending");
+                adapter.sortAlphabetically("descending");
+            }
+            else{
+                binding.btnSortOrder.setText("Ascending");
+                adapter.sortAlphabetically("ascending");
+            }
         }
     }
 }

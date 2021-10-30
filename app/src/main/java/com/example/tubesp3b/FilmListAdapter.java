@@ -3,21 +3,28 @@ package com.example.tubesp3b;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.example.tubesp3b.databinding.ItemListFilmBinding;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class FilmListAdapter extends BaseAdapter {
+public class FilmListAdapter extends BaseAdapter implements Filterable {
     private ItemListFilmBinding binding;
     private ArrayList<Movie> listItems;
+    private ArrayList<Movie> listItemsFull;
     private FragmentListFilm fragment;
     private ListFilmPresenter presenter;
 
     public FilmListAdapter(FragmentListFilm fragment, ListFilmPresenter presenter){
         this.fragment=fragment;
         this.listItems=new ArrayList<Movie>();
+        this.listItemsFull=new ArrayList<Movie>();
         this.presenter = presenter;
     }
 
@@ -28,11 +35,35 @@ public class FilmListAdapter extends BaseAdapter {
     }
     public void addLine(Movie newItem){
         this.listItems.add(newItem);
+        this.listItemsFull.add(newItem);
         this.notifyDataSetChanged();
+    }
+
+    public void sortAlphabetically(String order){
+        if(order == "ascending"){
+            Collections.sort(listItems, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie m1, Movie m2) {
+                    return m1.getTitle().compareTo(m2.getTitle());
+                }
+            });
+        }
+        else{
+            Collections.sort(listItems, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie m1, Movie m2) {
+                    return m2.getTitle().compareTo(m1.getTitle());
+                }
+            });
+
+        }
+        this.listItemsFull=new ArrayList<>(listItems);
+        notifyDataSetChanged();
     }
 
     public void clearData(){
         listItems.clear();
+        listItemsFull.clear();
     }
 
     @Override
@@ -66,6 +97,41 @@ public class FilmListAdapter extends BaseAdapter {
 
         return view;
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Movie> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(listItemsFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Movie item : listItemsFull) {
+                    if (item.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listItems.clear();
+            listItems.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     private class ViewHolder implements View.OnClickListener{
         protected ItemListFilmBinding binding;
